@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Her Voice 360 - Women Safety Platform</title>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='user_dashboard.css') }}">
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='sos.css') }}">
+
+  <!-- SweetAlert CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+<!-- FLASH MESSAGE POPUP -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: '{{ messages[0][1] }}',
+        confirmButtonColor: '#d63384'
+      });
+    </script>
+  {% endif %}
+{% endwith %}
+
+<header class="main-header">
+
+  <div class="header-container">
+
+    <!-- Top User Right Corner -->
+    <div class="top-user">
+        <span>Welcome {{ name }}</span> |
+        <a href="/logout">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+    </div>
+
+    <!-- Centered Title -->
+    <h1 class="site-title">
+        <i class="fa-solid fa-venus"></i>
+        Her Voice 360
+    </h1>
+
+    <!-- Navigation -->
+<nav class="nav-menu">
+    <button class="nav-btn active">
+      <i class="fa-solid fa-house"></i> Dashboard
+    </button>
+
+    <a href="{{ url_for('complaint') }}" class="nav-btn">
+      <i class="fa-solid fa-file-lines"></i>
+      Complaint
+    </a>
+
+    <a href="{{ url_for('safety_guide') }}" class="nav-btn">
+    <i class="fa-solid fa-book"></i> Safety Guide
+    </a>
+
+    <a href="{{ url_for('user_feedback') }}" class="nav-btn">
+     <i class="fa-solid fa-comments"></i> Feedback
+    </a>
+
+    <a href="{{ url_for('admin_login') }}" class="nav-btn">
+      <i class="fa-solid fa-user-shield"></i>
+      Admin
+    </a>
+</nav>
+
+  </div>
+
+</header>
+
+<div class="container">
+
+  <!-- Welcome Card -->
+  <div class="user_card">
+    <h2>Welcome to Your Safe Space</h2>
+    <p>
+      Her Voice 360 empowers women through safety resources,
+      support networks, and actionable tools.
+      You are not alone. Help is always available.
+    </p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="number">24/7</div>
+      <div class="label">Support Available</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="number">100%</div>
+      <div class="label">Anonymous</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="number">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <div class="label">Secure & Private</div>
+    </div>
+  </div>
+
+  <!-- Action Cards -->
+  <div class="grid">
+    <div class="action-card">
+      <i class="fa-solid fa-shield-halved"></i>
+      <h3>File a Complaint</h3>
+      <p>Report incidents anonymously with text, voice, photos, or videos</p>
+    </div>
+
+    <div class="action-card">
+      <i class="fa-solid fa-book-open"></i>
+      <h3>Safety Guide</h3>
+      <p>Access legal rights and safety protocols</p>
+    </div>
+
+    <div class="action-card">
+      <i class="fa-solid fa-comment-dots"></i>
+      <h3>Anonymous Feedback</h3>
+      <p>Share your thoughts securely</p>
+    </div>
+  </div>
+
+  <!-- Emergency Contacts -->
+  <div class="card">
+    <h2><i class="fa-solid fa-phone"></i> Emergency Contacts</h2>
+
+    <div class="emergency-contacts">
+      <div class="contact-item">
+        <h4>Women's Helpline</h4>
+        <a href="tel:1091">1091</a>
+      </div>
+
+      <div class="contact-item">
+        <h4>Police Emergency</h4>
+        <a href="tel:100">100</a>
+      </div>
+
+      <div class="contact-item">
+        <h4>Medical Emergency</h4>
+        <a href="tel:108">108</a>
+      </div>
+
+      <div class="contact-item">
+        <h4>NCW Helpline</h4>
+        <a href="tel:7827170170">7827-170-170</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ======================= -->
+<!-- SOS FLOATING BUTTON -->
+<!-- ======================= -->
+<button onclick="sendSOS()"> SOS</button>
+
+<!-- ======================= -->
+<!-- SOS MODAL -->
+<!-- ======================= -->
+<div id="sosModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeSOS()">&times;</span>
+    <h2 style="color:red;">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      SOS ACTIVATED
+    </h2>
+    <p>
+      Emergency services have been notified.<br>
+      Your location has been shared with trusted contacts.<br><br>
+      <strong>Stay calm. Help is on the way.</strong>
+    </p>
+    <div style="margin-top:20px;">
+      Emergency Hotline:
+      <a href="tel:1091" style="color:red;font-weight:bold;">
+        1091
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>

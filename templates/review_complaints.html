@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='review_complaints.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='sos.css') }}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <h2>Under Review Complaints</h2>
+
+{% for complaint in complaints %}
+
+<div class="complaint-card">
+
+<h3>Complaint #{{ complaint.id }}</h3>
+
+<p><b>Location:</b> {{ complaint.location }}</p>
+
+<p><b>Description:</b> {{ complaint.description }}</p>
+
+<p><b>Status:</b> {{ complaint.status }}</p>
+
+<a href="{{ url_for('view_complaint', complaint_id=complaint.id) }}" class="view-btn">
+View Details
+</a>
+
+</div>
+
+{% endfor %}
+
+<a href="{{ url_for('admin_dashboard') }}" class="back-btn">⬅ Back </a>
+
+<!-- SOS FLOATING BUTTON -->
+
+<button class="sos-btn" onclick="sendSOS()">SOS</button>
+
+<!-- SOS MODAL -->
+
+<div id="sosModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeSOS()">&times;</span>
+    <h2 style="color:red;">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      SOS ACTIVATED
+    </h2>
+    <p>
+      Emergency services have been notified.<br>
+      Your location has been shared with trusted contacts.<br><br>
+      <strong>Stay calm. Help is on the way.</strong>
+    </p>
+    <div style="margin-top:20px;">
+      Emergency Hotline:
+      <a href="tel:1091" style="color:red;font-weight:bold;">
+        1091
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>

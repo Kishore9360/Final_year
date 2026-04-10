@@ -1,0 +1,109 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  color: #333;
+  background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+}
+
+/* PAGE WRAPPER */
+.page {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* MAIN CARD */
+.safety-card {
+    width: 90%;
+    max-width: 1000px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* TITLE */
+.safety-card h2 i{
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 35px;
+    margin-left: 230px;
+    color:#1e90ff;
+}
+
+/* EACH SECTION */
+.guide-section {
+    background: #f9fbfd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border-left: 6px solid #1e90ff;
+    transition: 0.3s;
+}
+
+/* HOVER EFFECT */
+.guide-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-left: 6px solid #ff2e63;
+}
+
+/* SECTION TITLES */
+.guide-section h3 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 18px;
+}
+
+/* ICONS */
+.guide-section h3 i {
+    margin-right: 8px;
+    color: #1e90ff;
+}
+
+/* LIST */
+.guide-section ul {
+    padding-left: 20px;
+}
+
+.guide-section li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+    color: #444;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .safety-card {
+        padding: 20px;
+    }
+
+    .safety-card h2 {
+        font-size: 22px;
+    }
+}
+
+.back-btn{
+    display:inline-block;
+    margin-bottom:30px;
+    padding:8px 15px;
+    background: linear-gradient(to right, #17a2b8, #e63946);
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+    font-size:12px;
+    margin-left: 850px;
+}
+
+.back-btn:hover{
+    background: #e63946;
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Feedback</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='sos.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='admin_feedback.css') }}">
+
+</head>
+
+<body>
+
+<a href="{{ url_for('admin_dashboard') }}" class="back-btn">⬅ Back </a>
+
+<div class="container">
+
+  <div class="header">
+    <h2><i class="fa-solid fa-comments"></i> User Feedback</h2>
+  </div>
+
+  <!-- ✅ FLASH MESSAGE (TOP CENTER) -->
+<div id="toast-container"></div>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  <script>
+    var messages = {{ messages | tojson }};
+  </script>
+{% endwith %}
+
+  <!-- ================= FEEDBACK LIST ================= -->
+  {% for f in feedback_list %}
+
+  <div class="feedback-card">
+
+    <h4>{{ f.name }} ({{ f.mobile }})</h4>
+
+    <p><b>Category:</b> {{ f.category }}</p>
+    <p><b>Message:</b> {{ f.message }}</p>
+
+    <!-- ⭐ Rating -->
+    <p class="rating">
+      <b>Rating:</b>
+
+      {% for i in range(f.rating) %}
+        <span class="star filled">★</span>
+      {% endfor %}
+
+      {% for i in range(5 - f.rating) %}
+        <span class="star empty">★</span>
+      {% endfor %}
+
+      ({{ f.rating }}/5)
+    </p>
+
+    <!-- ✅ ACTION -->
+    <div class="action-area">
+      {% if f.status != "Solved" %}
+        <a href="{{ url_for('solve_feedback', feedback_id=f.id) }}" class="solve-btn">
+          <i class="fa fa-check"></i> Solve
+        </a>
+      {% else %}
+        <span class="badge resolved">✔ Solved</span>
+      {% endif %}
+    </div>
+
+  </div>
+
+  {% else %}
+    <p class="no-data">No feedback available.</p>
+  {% endfor %}
+
+</div>
+
+<!-- ================= SOS ================= -->
+<button class="sos-btn" onclick="sendSOS()">SOS</button>
+
+<div id="sosModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeSOS()">&times;</span>
+    <h2 style="color:red;">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      SOS ACTIVATED
+    </h2>
+    <p>
+      Emergency services have been notified.<br>
+      Your location has been shared with trusted contacts.<br><br>
+      <strong>Stay calm. Help is on the way.</strong>
+    </p>
+    <div style="margin-top:20px;">
+      Emergency Hotline:
+      <a href="tel:1091" style="color:red;font-weight:bold;">1091</a>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+
+</body>
+</html>

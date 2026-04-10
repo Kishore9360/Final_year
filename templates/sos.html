@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Her Voice 360 - Women Safety Platform</title>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='user_dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='sos.css') }}">
+</head>
+
+<body>
+<header class="main-header">
+
+  <div class="header-container">
+
+    <div class="top-user">
+        <span>Welcome {{ name }}</span> |
+        <a href="/logout">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+    </div>
+
+    <h1 class="site-title">
+        <i class="fa-solid fa-venus"></i>
+        Her Voice 360
+    </h1>
+
+    <nav class="nav-menu">
+        <a href="{{ url_for('user_dashboard') }}" class="nav-btn">
+          <i class="fa-solid fa-house"></i> Dashboard
+        </a>
+        <a href="{{ url_for('complaint') }}" class="nav-btn">
+          <i class="fa-solid fa-file-lines"></i> Complaint
+        </a>
+        <button class="nav-btn active">
+          <i class="fa-solid fa-exclamation-triangle"></i> SOS
+        </button>
+        <a href="{{ url_for('safety_guide') }}" class="nav-btn">
+          <i class="fa-solid fa-book"></i> Safety Guide
+        </a>
+        <a href="{{ url_for('user_feedback') }}" class="nav-btn">
+          <i class="fa-solid fa-comments"></i> Feedback
+        </a>
+        <a href="{{ url_for('admin_login') }}" class="nav-btn">
+          <i class="fa-solid fa-user-shield"></i> Admin
+        </a>
+    </nav>
+
+  </div>
+
+</header>
+
+
+<div class="container">
+
+  <!-- Welcome Card -->
+  <div class="card">
+    <h2>Welcome to Your Safe Space</h2>
+    <p>
+      Her Voice 360 empowers women through safety resources,
+      support networks, and actionable tools.
+      You are not alone. Help is always available.
+    </p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="number">24/7</div>
+      <div class="label">Support Available</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="number">100%</div>
+      <div class="label">Anonymous</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="number">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <div class="label">Secure & Private</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ======================= -->
+<!-- SOS FLOATING BUTTON -->
+<button onclick="sendSOS()">🚨 SOS</button>
+
+<!-- SOS MODAL -->
+<div id="sosModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeSOS()">&times;</span>
+
+    <h2 style="color:red;">🚨 SOS ACTIVATED</h2>
+
+    <p>
+      Emergency alert sent successfully!<br>
+      Your location has been shared.<br><br>
+      <strong>Stay calm. Help is on the way.</strong>
+    </p>
+
+    <p>
+      📞 Emergency: <a href="tel:1091">1091</a>
+    </p>
+  </div>
+</div>
+</div>
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>

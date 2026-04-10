@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Women's Safety Guide</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='safety_guide.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='sos.css') }}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<div id="guide" class="page">
+  <div class="safety-card">
+    <a href="{{ url_for('user_dashboard') }}" class="back-btn">⬅ Back </a>
+
+    <h2>
+      <i class="fa-solid fa-book-open"></i>
+      Women's Safety Guide & Awareness
+    </h2>
+
+    <!-- Legal Rights -->
+    <div class="guide-section">
+      <h3><i class="fa-solid fa-scale-balanced"></i> Legal Rights</h3>
+      <ul>
+        <li>Right to file FIR for any cognizable offense (Section 154 CrPC)</li>
+        <li>Protection from domestic violence under DV Act 2005</li>
+        <li>Sexual harassment protection under POSH Act 2013</li>
+        <li>Right to free legal aid if income is below prescribed limit</li>
+        <li>Zero FIR can be filed at any police station regardless of jurisdiction</li>
+      </ul>
+    </div>
+
+    <!-- Personal Safety -->
+    <div class="guide-section">
+      <h3><i class="fa-solid fa-shield"></i> Personal Safety Tips</h3>
+      <ul>
+        <li>Always inform someone about your whereabouts</li>
+        <li>Keep emergency numbers on speed dial</li>
+        <li>Trust your instincts</li>
+        <li>Avoid sharing personal information with strangers</li>
+        <li>Use well-lit, populated routes</li>
+        <li>Keep your phone charged</li>
+      </ul>
+    </div>
+
+    <!-- Self Defense -->
+    <div class="guide-section">
+      <h3><i class="fa-solid fa-hands-helping"></i> Self-Defense Basics</h3>
+      <ul>
+        <li>Target vulnerable areas: eyes, nose, throat, groin</li>
+        <li>Use your voice loudly</li>
+        <li>Carry pepper spray (where legal)</li>
+        <li>Learn basic martial arts</li>
+        <li>Create distance and run to safety</li>
+      </ul>
+    </div>
+
+    <!-- Cyber Safety -->
+    <div class="guide-section">
+      <h3><i class="fa-solid fa-laptop"></i> Cyber Safety</h3>
+      <ul>
+        <li>Use strong unique passwords</li>
+        <li>Enable two-factor authentication</li>
+        <li>Be cautious sharing personal photos</li>
+        <li>Report cyber harassment</li>
+        <li>Block suspicious accounts</li>
+        <li>Never share OTP or banking details</li>
+      </ul>
+    </div>
+
+    <!-- Workplace Safety -->
+    <div class="guide-section">
+      <h3><i class="fa-solid fa-briefcase"></i> Workplace Safety</h3>
+      <ul>
+        <li>Know your company's POSH policy</li>
+        <li>Document incidents with dates and witnesses</li>
+        <li>File written complaints</li>
+        <li>No retaliation allowed by law</li>
+        <li>Contact NCW if internal process fails</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ======================= -->
+<!-- SOS FLOATING BUTTON -->
+<!-- ======================= -->
+<button class="sos-btn" onclick="sendSOS()">SOS</button>
+
+<!-- ======================= -->
+<!-- SOS MODAL -->
+<!-- ======================= -->
+<div id="sosModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeSOS()">&times;</span>
+    <h2 style="color:red;">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      SOS ACTIVATED
+    </h2>
+    <p>
+      Emergency services have been notified.<br>
+      Your location has been shared with trusted contacts.<br><br>
+      <strong>Stay calm. Help is on the way.</strong>
+    </p>
+    <div style="margin-top:20px;">
+      Emergency Hotline:
+      <a href="tel:1091" style="color:red;font-weight:bold;">
+        1091
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>

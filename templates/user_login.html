@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='user_login.css') }}">
+</head>
+<body class="auth-page">
+
+<div class="card">
+    <h2>User Login</h2>
+
+    {% if error %}
+        <div class="error-message">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <!-- ✅ FIXED HERE -->
+<form method="POST">
+    <input type="text" name="mobile"
+           class="{% if error %}error-box{% endif %}"
+           placeholder="Mobile">
+
+    <input type="password" name="password"
+           class="{% if error %}error-box{% endif %}"
+           placeholder="Password">
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <button type="submit">Sign In</button>
+</form>
+
+    <div class="link">
+        <p>
+            Don't have an account?
+            <!-- ✅ FIXED HERE -->
+            <a href="{{ url_for('user_signup') }}">Create Account</a>
+        </p>
+    </div>
+
+</div>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+    <p class="error">{{ message }}</p>
+  {% endfor %}
+{% endwith %}
+
+</body>
+</html>

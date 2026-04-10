@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  background: #f4f6f9;
+  margin: 0;
+  padding: 20px;
+}
+
+.user i {
+  color: #17adc4;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: black;
+}
+
+h2 i{
+  color: #17a2b8;
+}
+
+.feedback-card {
+  background: white;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rating {
+  color: #ff9800;
+  font-size: 18px;
+}
+
+.solve-btn {
+  background: #28a745;
+  color: white;
+  padding: 9px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  padding-top: 1px;
+}
+
+.solve-btn:hover {
+  background: #03741d;
+}
+
+.back-btn {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 8px 15px;
+  background: linear-gradient(to right, #17a2b8, #e63946);
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 12px;
+  margin-left: 90%;
+}
+
+.back-btn:hover {
+  background: #e63946;
+}
+
+
+#toast-container {
+  position: fixed;
+  top: 20px;
+  left: 550px;
+  z-index: 9999;
+}
+
+.toast {
+  background: #333;
+  color: #fff;
+  padding: 12px 18px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: 0.4s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast.success {
+  background: linear-gradient(to right, #17a2b8, #e63946);
+}

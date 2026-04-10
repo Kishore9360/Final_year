@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Anonymous Feedback</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='feedback.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='sos.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<div id="feedback" class="feedback-page">
+  <div class="feedback-card">
+    <a href="{{ url_for('user_dashboard') }}" class="back-btn">⬅ Back </a>
+
+    <h2>
+      <i class="fa-solid fa-comments"></i>
+      Anonymous Feedback System
+    </h2>
+
+    <p style="margin-bottom:20px;color:#666;">
+      Your feedback helps us improve. All submissions are completely anonymous.
+    </p>
+
+    <!-- ================= FORM ================= -->
+<form method="POST" action="{{ url_for('submit_feedback') }}" onsubmit="return validateForm()">
+
+  <!-- Category -->
+  <div class="form-group">
+    <label>Feedback Category *</label>
+    <select name="category" id="category" required>
+      <option value="">-- Select Category --</option>
+      <option value="service">Service Quality</option>
+      <option value="feature">Feature Request</option>
+      <option value="complaint">Complaint</option>
+      <option value="suggestion">Suggestion</option>
+      <option value="appreciation">Appreciation</option>
+    </select>
+  </div>
+
+  <!-- Message -->
+  <div class="form-group">
+    <label>Your Feedback *</label>
+    <textarea name="message" id="message" required
+      placeholder="Share your thoughts..."></textarea>
+  </div>
+
+  <!-- Rating -->
+  <div class="form-group">
+    <label>Rating *</label>
+
+    <div class="rating-input">
+      <input type="hidden" name="rating" id="rating-value" required>
+
+      <span class="star" data-value="1">★</span>
+      <span class="star" data-value="2">★</span>
+      <span class="star" data-value="3">★</span>
+      <span class="star" data-value="4">★</span>
+      <span class="star" data-value="5">★</span>
+    </div>
+  </div>
+
+  <button type="submit" class="btn-primary">
+    <i class="fa-solid fa-paper-plane"></i>
+    Submit Feedback
+  </button>
+
+</form>
+
+    <!-- ================= SHOW FEEDBACK ================= -->
+    {% if feedbacks %}
+      <h3 style="margin-top:30px;">Your Feedbacks</h3>
+
+      {% for feedback in feedbacks %}
+        <div class="feedback-box">
+
+          <p><strong>Category:</strong> {{ feedback.category }}</p>
+          <p><strong>Message:</strong> {{ feedback.message }}</p>
+
+          <p>
+            <strong>Rating:</strong>
+
+            {% for i in range(feedback.rating or 0) %}
+              <span style="color: orange;">★</span>
+            {% endfor %}
+
+            {% for i in range(5 - (feedback.rating or 0)) %}
+              <span style="color: #ccc;">★</span>
+            {% endfor %}
+
+            ({{ feedback.rating or 0 }}/5)
+          </p>
+
+        </div>
+      {% endfor %}
+    {% endif %}
+
+  </div>
+</div>
+
+<!-- ======================= -->
+<!-- SOS FLOATING BUTTON -->
+<!-- ======================= -->
+<button class="sos-btn" onclick="sendSOS()">SOS</button>
+
+<!-- ======================= -->
+<!-- SOS MODAL -->
+<!-- ======================= -->
+<div id="sosModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeSOS()">&times;</span>
+    <h2 style="color:red;">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      SOS ACTIVATED
+    </h2>
+    <p>
+      Emergency services have been notified.<br>
+      Your location has been shared with trusted contacts.<br><br>
+      <strong>Stay calm. Help is on the way.</strong>
+    </p>
+    <div style="margin-top:20px;">
+      Emergency Hotline:
+      <a href="tel:1091" style="color:red;font-weight:bold;">
+        1091
+      </a>
+    </div>
+  </div>
+</div>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+    <p class="error">{{ message }}</p>
+  {% endfor %}
+{% endwith %}
+
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>

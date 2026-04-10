@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard - Her Voice 360</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='admin_dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='sos.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<div class="topbar">
+
+<h1><i class="fa-solid fa-venus"></i> Her Voice 360</h1>
+
+<div class="nav-menu">
+
+<a href="#dashboard" class="nav-btn">
+<i class="fa-solid fa-chart-line"></i> Dashboard
+</a>
+
+<a href="{{ url_for('pending_complaints') }}" class="nav-btn">
+<i class="fa-solid fa-clock"></i> Pending
+</a>
+
+<a href="{{ url_for('review_complaints') }}" class="nav-btn">
+<i class="fa-solid fa-magnifying-glass"></i> Under Review
+</a>
+
+<a href="{{ url_for('resolved_complaints') }}" class="nav-btn">
+<i class="fa-solid fa-circle-check"></i> Resolved
+</a>
+
+<!-- ✅ Feedback Page Link -->
+<a href="{{ url_for('admin_feedback') }}" class="nav-btn">
+<i class="fa-solid fa-comments"></i> Feedback
+</a>
+
+<a href="{{ url_for('admin_logout') }}" class="nav-btn logout">
+<i class="fa-solid fa-right-from-bracket"></i> Logout
+</a>
+
+</div>
+
+</div>
+
+
+<div class="dashboard-container">
+
+<!-- ================= DASHBOARD ================= -->
+
+<section id="dashboard">
+
+<h2>Admin Overview</h2>
+
+<div class="stats-grid">
+
+<div class="stat-card">
+<h3>{{ total|length }}</h3>
+<p>Total Complaints</p>
+</div>
+
+<div class="stat-card">
+<h3>{{ pending|length }}</h3>
+<p>Pending</p>
+</div>
+
+<div class="stat-card">
+<h3>{{ review|length }}</h3>
+<p>Under Review</p>
+</div>
+
+<div class="stat-card">
+<h3>{{ resolved|length }}</h3>
+<p>Resolved</p>
+</div>
+
+<div class="stat-card">
+<h3>{{ feedback_list|length }}</h3>
+<p>Total Feedback</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PENDING ================= -->
+<h2>Complaints</h2>
+<section id="pending">
+
+{% for complaint in pending %}
+
+<div class="complaint-card pending">
+
+<h4>Complaint #{{ complaint.id }}</h4>
+
+<p><b>Location:</b> {{ complaint.location }}</p>
+
+<p><b>Description:</b> {{ complaint.description }}</p>
+
+<span class="badge pending">{{ complaint.status }}</span>
+
+</div>
+
+</a>
+
+{% endfor %}
+
+</section>
+
+<!-- ================= REVIEW ================= -->
+
+<section id="review">
+
+{% for complaint in review %}
+
+<div class="complaint-card review">
+
+<h4>Complaint #{{ complaint.id }}</h4>
+
+<p><b>Location:</b> {{ complaint.location }}</p>
+
+<p><b>Description:</b> {{ complaint.description }}</p>
+
+<span class="badge review">{{ complaint.status }}</span>
+
+</div>
+
+</a>
+
+{% endfor %}
+
+</section>
+
+<!-- ================= RESOLVED ================= -->
+
+<section id="resolved">
+
+{% for c in resolved %}
+
+<div class="complaint-card">
+
+<h4>Complaint #{{ c.id }}</h4>
+
+<p><b>Location:</b> {{ c.location }}</p>
+
+<p><b>Description:</b> {{ c.description }}</p>
+
+<span class="badge resolved">{{ c.status }}</span>
+
+</div>
+
+{% endfor %}
+
+</section>
+
+<!-- ================= FEEDBACK ================= -->
+
+<section id="feedback">
+
+<h2>Feedbacks</h2>
+
+{% for f in feedback_list %}
+
+<div class="complaint-card feedback-card">
+
+<h4>{{ f.name }} ({{ f.mobile }})</h4>
+
+<p><b>Category:</b> {{ f.category }}</p>
+
+<p><b>Message:</b> {{ f.message }}</p>
+
+<p class="rating">
+<b>Rating:</b>
+{% if f.rating %}
+⭐ {{ f.rating }}/5
+{% else %}
+No Rating
+{% endif %}
+</p>
+
+<!-- ✅ ONLY STATUS (NO SOLVE BUTTON HERE) -->
+<span class="badge {{ f.status|lower if f.status else 'pending' }}">
+{{ f.status if f.status else 'Pending' }}
+</span>
+
+</div>
+
+{% else %}
+
+<p>No feedback available.</p>
+
+{% endfor %}
+
+</section>
+</div>
+<!-- SOS FLOATING BUTTON -->
+<!-- ======================= -->
+<button class="sos-btn" onclick="sendSOS()">SOS</button>
+
+<!-- ======================= -->
+<!-- SOS MODAL -->
+<!-- ======================= -->
+<div id="sosModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeSOS()">&times;</span>
+    <h2 style="color:red;">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      SOS ACTIVATED
+    </h2>
+    <p>
+      Emergency services have been notified.<br>
+      Your location has been shared with trusted contacts.<br><br>
+      <strong>Stay calm. Help is on the way.</strong>
+    </p>
+    <div style="margin-top:20px;">
+      Emergency Hotline:
+      <a href="tel:1091" style="color:red;font-weight:bold;">
+        1091
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>

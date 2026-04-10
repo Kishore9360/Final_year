@@ -1,0 +1,156 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  color: #333;
+  background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+}
+
+/* ===== PAGE CONTAINER ===== */
+
+.feedback-page{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+
+/* ===== CARD DESIGN ===== */
+
+.feedback-card{
+    width:60%;
+    background:#f3f3f3;
+    padding:40px 50px;
+    border-radius:14px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.15);
+}
+
+
+/* ===== TITLE ===== */
+
+.feedback-card h2{
+    margin-bottom:10px;
+    font-size:26px;
+    color:#333;
+}
+
+.feedback-card h2 i{
+    color:#17a2b8;
+    margin-right:8px;
+}
+
+
+/* ===== FORM GROUP ===== */
+
+.form-group{
+    margin-bottom:22px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:600;
+    color:#333;
+}
+
+
+/* ===== INPUTS ===== */
+
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    font-size:14px;
+    background:white;
+}
+
+textarea{
+    height:100px;
+    resize:none;
+}
+
+
+/* ===== STAR RATING ===== */
+
+.star {
+  font-size: 28px;
+  cursor: pointer;
+  color: #ccc;
+}
+
+/* Hover effect */
+.star:hover,
+.star:hover ~ .star {
+  color: gold;
+}
+
+/* Click (selected) effect */
+.star.selected {
+  color: gold;
+}
+
+
+/* ===== SUBMIT BUTTON ===== */
+
+.btn-primary{
+    margin-top:20px;
+    padding:12px 30px;
+    border:none;
+    border-radius:8px;
+    background: linear-gradient(to right,#17a2b8, #e63946);
+    color:white;
+    font-size:15px;
+    cursor:pointer;
+}
+
+.btn-primary:hover{
+    background:#e84355;
+}
+
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:900px){
+
+.feedback-card{
+    width:90%;
+    padding:30px;
+}
+
+}
+
+.back-btn{
+    display:inline-block;
+    margin-bottom:15px;
+    padding:8px 15px;
+    background: linear-gradient(to right, #17a2b8, #e63946);
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+    font-size:10px;
+    margin-left: 650px;
+}
+
+.back-btn:hover{
+    background: #e84355
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+input.error-box, select.error-box, textarea.error-box {
+  border: 2px solid red;
+}

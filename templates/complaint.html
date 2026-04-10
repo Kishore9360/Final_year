@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Anonymous Complaint</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='complaint.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='sos.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ✅ FLASH POPUP (ONLY ONE PLACE) -->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <script>
+      alert("{{ messages[0] }}");
+    </script>
+  {% endif %}
+{% endwith %}
+
+<div class="card-complaint">
+
+    <a href="{{ url_for('user_dashboard') }}" class="back-btn">⬅ Back</a>
+
+    <h2>Anonymous Complaint System</h2>
+
+    <form method="POST"
+          action="{{ url_for('complaint') }}"
+          enctype="multipart/form-data">
+
+        <!-- Complaint Type -->
+        <label>Complaint Type *</label>
+        <select name="complaint_type" required>
+            <option value="">Select</option>
+            <option value="Harassment">Harassment</option>
+            <option value="Domestic Violence">Domestic Violence</option>
+            <option value="Cyber Crime">Cyber Crime</option>
+        </select>
+
+        <!-- Incident Date -->
+        <label>Incident Date *</label>
+        <input type="date" name="incident_date" required>
+
+        <!-- Location -->
+        <label>Location *</label>
+        <input type="text" name="location" placeholder="Enter location" required>
+
+        <!-- Phone -->
+        <label>Phone Number *</label>
+        <input type="number" name="phone" placeholder="Enter phone number" required>
+
+        <!-- Description -->
+        <label>Description *</label>
+        <textarea name="description" placeholder="Describe the incident..." required></textarea>
+
+        <!-- Voice Recording -->
+        <h3>Voice Recording (Optional)</h3>
+        <button type="button" onclick="toggleRecording()">Start / Stop Recording</button>
+        <p id="recordingStatus"></p>
+        <input type="hidden" name="voice_file_name" id="voiceFileName">
+
+        <!-- Evidence Upload -->
+        <label>Upload Evidence (Photo/Video)</label>
+        <input type="file"
+               name="evidence_files"
+               multiple
+               accept="image/*,video/*">
+
+        <br><br>
+
+        <button type="submit">Submit Complaint</button>
+
+    </form>
+</div>
+
+<!-- ======================= -->
+<!-- SOS FLOATING BUTTON -->
+<!-- ======================= -->
+<button class="sos-btn" onclick="sendSOS()">SOS</button>
+
+<!-- ======================= -->
+<!-- SOS MODAL -->
+<!-- ======================= -->
+<div id="sosModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeSOS()">&times;</span>
+
+    <h2 style="color:red;">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      SOS ACTIVATED
+    </h2>
+
+    <p>
+      Emergency services have been notified.<br>
+      Your location has been shared with trusted contacts.<br><br>
+      <strong>Stay calm. Help is on the way.</strong>
+    </p>
+
+    <div style="margin-top:20px;">
+      Emergency Hotline:
+      <a href="tel:1091" style="color:red;font-weight:bold;">
+        1091
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+
+</body>
+</html>

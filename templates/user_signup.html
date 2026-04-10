@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='user_signup.css') }}">
+</head>
+
+<body class="signup-page">
+
+<div class="card">
+    <h2>Registration</h2>
+
+    <!-- ✅ FLASH MESSAGE INSIDE CARD -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="error-msg">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <form method="POST" action="/user_signup">
+
+        <input type="text" name="name" placeholder="Enter name" required>
+
+        <input type="tel" name="mobile" placeholder="Enter mobile number" required>
+
+        <input type="date" name="dob" required>
+
+        <input type="text" name="aadhaar" placeholder="Enter Aadhaar number" required>
+
+        <input type="email" name="email" placeholder="Enter email" required>
+
+        <input type="password" name="password" placeholder="Enter password" required>
+
+        <button type="submit">Sign Up</button>
+
+    </form>
+
+    <div class="link">
+        <p>Already have an account?
+        <a href="/user_login">Login</a></p>
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>

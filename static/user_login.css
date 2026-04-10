@@ -1,0 +1,95 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  color: #333;
+  background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+}
+
+/*user_login html*/
+
+.auth-page button:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+  background: #e84355;
+}
+
+.auth-page button {
+  padding: 15px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(to right,#17a2b8, #e63946);
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.auth-page input:focus {
+  outline: none;
+  border-color: #1da1f2;
+  background: #ffffff;
+}
+
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #c7d8e0, #e6cfd6);
+  padding: 30px 20px;
+}
+
+.auth-page .card {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.auth-page .card:hover {
+  transform: translateY(-5px);
+}
+
+.auth-page h2 {
+  color: #1da1f2;
+  margin-bottom: 20px;
+  font-size: 23px;
+}
+
+.auth-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-page input {
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  background: #e9eef2;
+  transition: 0.3s;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+input.error-box, select.error-box, textarea.error-box {
+  border: 2px solid red;
+}

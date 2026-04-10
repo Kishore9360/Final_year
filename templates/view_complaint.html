@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Complaint Details</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='view_complaint.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='sos.css') }}">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></head>
+
+<body>
+
+<div class="card">
+
+<h2>Complaint Details</h2>
+
+<div class="row"><strong>ID:</strong> {{ complaint.id }}</div>
+<div class="row"><strong>Type:</strong> {{ complaint.complaint_type }}</div>
+<div class="row"><strong>Date:</strong> {{ complaint.incident_date }}</div>
+<div class="row"><strong>Location:</strong> {{ complaint.location }}</div>
+
+<!-- MOBILE NUMBER + CALL BUTTON -->
+<div class="row mobile-row">
+<strong>Mobile Number:</strong>
+
+{% if complaint.mobile %}
+
+<span class="mobile">{{ complaint.mobile }}</span>
+
+<a href="tel:{{ complaint.mobile }}" class="call-btn">
+📞 Call
+</a>
+
+{% else %}
+
+<span class="no-mobile">No Mobile Number</span>
+
+{% endif %}
+
+</div>
+<div class="row"><strong>Description:</strong> {{ complaint.description }}</div>
+
+<div class="row">
+<strong>Status:</strong>
+<span class="badge {{ complaint.status }}">{{ complaint.status }}</span>
+</div>
+
+
+<!-- AUDIO -->
+{% if complaint.voice_file %}
+<div class="media">
+<strong>Voice Evidence:</strong><br>
+<audio controls>
+<source src="{{ url_for('static', filename='uploads/voice/' + complaint.voice_file) }}">
+</audio>
+</div>
+{% endif %}
+
+
+<!-- IMAGE / VIDEO EVIDENCE -->
+{% if complaint.evidence_files %}
+
+<div class="media">
+<strong>Evidence Files:</strong><br>
+
+{% set files = complaint.evidence_files.split(',') %}
+
+{% for file in files %}
+
+{% if file.endswith('.mp4') %}
+<video controls width="300">
+<source src="{{ url_for('static', filename='uploads/evidence/' + file) }}">
+</video>
+
+{% else %}
+<img src="{{ url_for('static', filename='uploads/evidence/' + file) }}" width="250">
+{% endif %}
+
+{% endfor %}
+
+</div>
+
+{% endif %}
+
+<br>
+
+<!-- Pending Stage -->
+{% if complaint.status == "Pending" %}
+
+<a href="{{ url_for('update_status', complaint_id=complaint.id, status='Under Review') }}" class="btn review">
+Mark Under Review
+</a>
+
+<a href="{{ url_for('admin_dashboard') }}" class="btn back">
+Back
+</a>
+
+{% endif %}
+
+
+<!-- Under Review Stage -->
+{% if complaint.status == "Under Review" %}
+
+<a href="{{ url_for('update_status', complaint_id=complaint.id, status='Resolved') }}" class="btn resolve">
+Mark Resolved
+</a>
+
+<a href="{{ url_for('admin_dashboard') }}" class="btn back">
+Back
+</a>
+
+{% endif %}
+
+
+<!-- Resolved Stage -->
+{% if complaint.status == "Resolved" %}
+
+<a href="{{ url_for('admin_dashboard') }}" class="btn back">
+Back
+</a>
+
+{% endif %}
+
+</div>
+
+<!-- ======================= -->
+<!-- SOS FLOATING BUTTON -->
+<!-- ======================= -->
+<button class="sos-btn" onclick="sendSOS()">SOS</button>
+
+<!-- ======================= -->
+<!-- SOS MODAL -->
+<!-- ======================= -->
+<div id="sosModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeSOS()">&times;</span>
+    <h2 style="color:red;">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      SOS ACTIVATED
+    </h2>
+    <p>
+      Emergency services have been notified.<br>
+      Your location has been shared with trusted contacts.<br><br>
+      <strong>Stay calm. Help is on the way.</strong>
+    </p>
+    <div style="margin-top:20px;">
+      Emergency Hotline:
+      <a href="tel:1091" style="color:red;font-weight:bold;">
+        1091
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>

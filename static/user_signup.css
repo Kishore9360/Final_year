@@ -1,0 +1,103 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  color: #333;
+  background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+}
+
+/*user_signup html*/
+
+.signup-page input {
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  background: #e9eef2;
+  transition: 0.3s;
+}
+
+.signup-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.signup-page h2 {
+  color: #1da1f2;
+  margin-bottom: 25px;
+  font-size: 24px;
+}
+
+.signup-page .card:hover {
+  transform: translateY(-5px);
+}
+
+.signup-page .card {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.signup-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #c7d8e0, #e6cfd6);
+  padding: 30px 20px;
+}
+
+.signup-page input:focus {
+  outline: none;
+  border-color: #1da1f2;
+  background: #ffffff;
+}
+
+.signup-page button:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+  background: #e84355;
+}
+
+.signup-page button {
+  padding: 15px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(to right,#17a2b8, #e63946);
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+input.error-box, select.error-box, textarea.error-box {
+  border: 2px solid red;
+}
+
+.error-msg {
+  color: red;
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: 500;
+}
