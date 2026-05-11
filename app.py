@@ -10,7 +10,6 @@ from twilio.rest import Client
 from dotenv import load_dotenv
 import os
 
-
 # ================= LOAD ENV =================
 load_dotenv()
 
@@ -18,13 +17,14 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
 
-# ================= DATABASE =================
+# ================= DATABASE FUNCTION =================
 def get_db_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Kishore@2210",
-        database="her_voice"
+        host=os.getenv("MYSQLHOST"),
+        user=os.getenv("MYSQLUSER"),
+        password=os.getenv("MYSQLPASSWORD"),
+        database=os.getenv("MYSQLDATABASE"),
+        port=int(os.getenv("MYSQLPORT"))
     )
 
 # ================= UPLOAD FOLDERS =================
@@ -65,7 +65,6 @@ def admin_required(f):
 @app.route("/")
 def home():
     return redirect(url_for("user_login"))
-
 
 # ================= USER SIGNUP =================
 @app.route("/user_signup", methods=["GET", "POST"])
@@ -257,7 +256,7 @@ def upload_voice():
 
     voice.save(save_path)
 
-    return {"file_name": filename}
+    return jsonify({"file_name": filename})
 
 # ================= FEEDBACK PAGE =================
 @app.route("/user_feedback")
@@ -685,6 +684,3 @@ def admin_logout():
 # ================= RUN =================
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
-
-if __name__ == "__main__":
-    app.run(debug=True)
