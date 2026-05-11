@@ -66,6 +66,7 @@ def admin_required(f):
 def home():
     return redirect(url_for("user_login"))
 
+
 # ================= USER SIGNUP =================
 @app.route("/user_signup", methods=["GET", "POST"])
 def user_signup():
